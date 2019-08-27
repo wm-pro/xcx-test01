@@ -1,0 +1,12 @@
+<template>
+    <view>
+        main
+    </view>
+</template>
+<script>
+import wepy from 'wepy'
+import mix from '@/mixins/category/main.js'
+export default class extends wepy.page {
+    
+}
+</script>

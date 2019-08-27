@@ -1,0 +1,67 @@
+<template>
+    <view>
+        <!-- 轮播图区域 -->
+       <swiper indicator-dots autoplay circular indicator-active-color='#fff'>
+           <swiper-item wx:for='{{swiperList}}' wx:key='index'>
+               <image src="{{item.image_src}}" />
+           </swiper-item>
+       </swiper>
+       <!-- 首页分类区域 -->
+        <view class="cateItems">
+             <block wx:for='{{catitemsList}}' wx:key='index'>
+            <navigator wx:if='{{item.open_type}}'  url='{{item.navigator_url}}'> 
+                <image src="{{item.image_src}}"  />
+            </navigator>
+            <image src="{{item.image_src}}" wx:else/>
+             </block>
+        </view>
+   <!-- 首页楼层区域 -->
+        <view class="floor">
+            <block wx:for='{{floorList}}' wx:key='index'>
+                <!-- 标题 -->
+                <image src="{{item.floor_title.image_src}}" class="title" />
+                <!-- 内容 -->
+                <view class="product_list">
+                    <image wx:for='{{item.product_list}}' 
+                    wx:key='index' wx:for-item='item1' 
+                    src="{{item1.image_src}}" style="width:{{item1.image_width}}rpx" @tap='goGoosList({{item1.navigator_url}})'/>
+                </view>
+            </block>
+        </view>
+    </view>
+</template>
+<script>
+import wepy from 'wepy'
+import mix from '@/mixins/tabs/home.js'
+export default class extends wepy.page {
+    mixins=[mix]
+}
+</script>
+<style lang="less">
+    .cateItems {
+        display: flex;
+        justify-content: space-around;
+        margin-top: 20px;
+        image {
+            width: 52px;
+            height: 52px;
+        }
+    }
+    .floor {
+        margin-top: 10px;
+        .title {
+            height: 18px;
+            margin-top: 10px;
+        }
+    }
+    .product_list {
+        image {
+            float: left;
+            height: 190rpx;
+            margin: 8rpx;
+        }
+        :nth-child(1) {
+            height: 390rpx;
+        }
+    }
+</style>
